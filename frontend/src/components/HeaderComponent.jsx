@@ -4,25 +4,26 @@ import { isUserLoggedIn, logout, isAdminUser } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import "./StyleComponent.css";
 const HeaderComponent = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const isAuth = isUserLoggedIn();
+  const isAdmin = isAdminUser();
 
-  useEffect(() => {
-    const checkAdminStatus = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const admin = await isAdminUser();
-          setIsAdmin(admin);
-        }
-      } catch (error) {
-        console.error("Error checking admin status:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const checkAdminStatus = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (token) {
+  //         const admin = await isAdminUser();
+  //         setIsAdmin(admin);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking admin status:", error);
+  //     }
+  //   };
 
-    checkAdminStatus();
-  }, []);
+  //   checkAdminStatus();
+  // }, []);
 
   const navigator = useNavigate();
 
@@ -44,7 +45,14 @@ const HeaderComponent = () => {
                 {" "}
                 {isAdmin && (
                   <li className="nav-item m-3">
-                    <NavLink to="/admin/products" className="nav-link">
+                    <NavLink to="/admin/interests" className="nav-link">
+                      АДМИН - ИНТЕРЕСИ
+                    </NavLink>
+                  </li>
+                )}
+                {isAdmin && (
+                  <li className="nav-item m-3">
+                    <NavLink to="/admin/events" className="nav-link">
                       АДМИН - СЪБИТИЯ
                     </NavLink>
                   </li>

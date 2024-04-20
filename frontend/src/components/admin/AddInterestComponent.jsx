@@ -20,7 +20,7 @@ const AddInterestComponent = () => {
     <div className="flex m-2">
       <h3>Add Interest</h3>
       <form onSubmit={handleSubmit} className="row g-3 space-around">
-        <div className="col-2">Interest name:</div>
+        <div className="col-2 m-3">Interest name:</div>
         <div className="col-3">
           <input
             type="text"

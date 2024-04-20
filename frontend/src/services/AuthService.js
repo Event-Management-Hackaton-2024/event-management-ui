@@ -29,15 +29,14 @@ export const isUserLoggedIn = () => {
 };
 export const getUserInfo = async (token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/users/${token}`,
-      {
-        headers: {
-          Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-      });
-    
+    const response = await axios.get(`${BASE_URL}/users/${token}`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
     return response.data;
   } catch (error) {
     throw new Error("Failed to fetch user information");
@@ -48,19 +47,18 @@ export const getLoggedInUser = () => {
   return username;
 };
 
-export const logout = () => {
-  localStorage.clear();
-  sessionStorage.clear();
-};
-
 export const isAdminUser = async () => {
   try {
     const user = await getUserInfo(getToken());
 
     console.log(user);
-
   } catch (error) {
     console.error("Error checking admin status:", error);
     return false;
   }
+};
+export const logout = () => {
+  localStorage.clear();
+  sessionStorage.clear();
+  isAdminUser = false;
 };
