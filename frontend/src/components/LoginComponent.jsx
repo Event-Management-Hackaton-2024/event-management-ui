@@ -14,10 +14,9 @@ const LoginComponent = () => {
 
     await loginAPICall(email, password)
       .then((response) => {
-        console.log(response.data);
-
-        const token = "Bearer " + response.data.accessToken;
-
+        console.log(response);
+        const token = response.data.token;
+        
         const role = response.data.role;
 
         storeToken(token);

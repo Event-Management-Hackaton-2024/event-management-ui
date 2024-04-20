@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { isUserLoggedIn, logout, isAdminUser } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import "./StyleComponent.css";
-
 const HeaderComponent = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ const HeaderComponent = () => {
 
   useEffect(() => {
     const checkAdminStatus = async () => {
+      
       try {
         const token = localStorage.getItem("token");
         if (token) {
