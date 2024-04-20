@@ -3,31 +3,23 @@ import { registerAPICall } from "../services/AuthService";
 import "./StyleComponent.css";
 
 const RegisterComponent = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurame] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [registrationStatus, setRegistrationStatus] = useState(null);
-  const [nameError, setNameError] = useState("");
-  const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
-  const [userType, setUserType] = useState("user");
+  const [isEventCreator, setIsEventCreator] = useState(false);
 
   function handleRegistrationForm(e) {
     e.preventDefault();
-
-    if (!name) {
-      setNameError("Име е задължително поле.");
-      return;
-    }
     if (!username) {
-      setUsernameError("Потребителско име е задължително поле.");
+      setEmailError("Username е задължително поле.");
       return;
     }
+
     if (!email) {
       setEmailError("Email е задължително поле.");
       return;
@@ -36,23 +28,22 @@ const RegisterComponent = () => {
       setPasswordError("Парола е задължително поле.");
       return;
     }
-    if (password !== repeatPassword) {
+    if (password !== confirmPassword) {
       setRepeatPasswordError("Паролите не съвпадат.");
       return;
     }
-    const endpoint = userType === "user" ? "addUser" : "addOrganization";
 
-    const register = { username, email, password };
-
-    //     registerAPICall(register)
-    //       .then((response) => {
-    //         console.log(response.data);
-    //         setRegistrationStatus("success");
-    //       })
-    //       .catch((error) => {
-    //         console.error(error);
-    //         setRegistrationStatus("error");
-    //       });
+    const register = { username, email, password, confirmPassword, isEventCreator };
+    console.log(register);
+    registerAPICall(register)
+      .then((response) => {
+        console.log(response.data);
+        setRegistrationStatus("success");
+      })
+      .catch((error) => {
+        console.error(error);
+        setRegistrationStatus("error");
+      });
   }
   return (
     <div className="container mb-4">
@@ -75,50 +66,21 @@ const RegisterComponent = () => {
                 Неуспешна регистрация, моля опитайте отново.
               </div>
             )}
+
             <div className="card-body">
               <form>
-                {/* <div className="row mb-3">
-                  <label className="col-md-4 control-label"> Име </label>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control"
-                      placeholder="Enter name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    ></input>
-                    {nameError && <div className="text-danger">{nameError}</div>}
-                  </div>
-                </div> */}
-
-                {/* <div className="row mb-3">
-                  <label className="col-md-4 control-label"> Фамилия </label>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control"
-                      placeholder="Enter name"
-                      value={name}
-                      onChange={(e) => setSurame(e.target.value)}
-                    ></input>
-                    {nameError && <div className="text-danger">{nameError}</div>}
-                  </div>
-                </div> */}
-
                 <div className="row mb-3 align-items-center">
-                  <label className="col-md-4 control-label"> Потребителско име </label>
+                  <label className="col-md-4 control-label"> Потребителско Име </label>
                   <div className="col-md-8">
                     <input
                       type="text"
                       name="username"
                       className="form-control"
-                      placeholder="Въведете потребителско"
+                      placeholder="Въведете потребитеслско име"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     ></input>
-                    {usernameError && <div className="text-danger">{usernameError}</div>}
+                    {emailError && <div className="text-danger">{emailError}</div>}
                   </div>
                 </div>
 
@@ -153,15 +115,15 @@ const RegisterComponent = () => {
                 </div>
 
                 <div className="row mb-3 align-items-center">
-                  <label className="col-md-4 control-label"> Повтаряне на парола </label>
+                  <label className="col-md-4 control-label"> Потвърдете паролата</label>
                   <div className="col-md-8">
                     <input
                       type="password"
-                      name="repeatPassword"
+                      name="confirmPassword"
                       className="form-control"
                       placeholder="Повторете паролата"
-                      value={repeatPassword}
-                      onChange={(e) => setRepeatPassword(e.target.value)}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {repeatPasswordError && (
                       <div className="text-danger">{repeatPasswordError}</div>
@@ -176,11 +138,11 @@ const RegisterComponent = () => {
                       <input
                         className="form-check-input"
                         type="radio"
-                        name="userType"
+                        name="isEventCreator"
                         id="user"
                         value="user"
-                        checked={userType === "user"}
-                        onChange={() => setUserType("user")}
+                        checked={isEventCreator == false}
+                        onChange={() => setIsEventCreator(false)}
                       />
                       <label className="form-check-label" htmlFor="user">
                         Потребител
@@ -190,14 +152,14 @@ const RegisterComponent = () => {
                       <input
                         className="form-check-input"
                         type="radio"
-                        name="userType"
-                        id="organization"
-                        value="organization"
-                        checked={userType === "organization"}
-                        onChange={() => setUserType("organization")}
+                        name="isEventCreator"
+                        id="creator"
+                        value="creator"
+                        checked={isEventCreator == true}
+                        onChange={() => setIsEventCreator(true)}
                       />
-                      <label className="form-check-label" htmlFor="organization">
-                        Организация
+                      <label className="form-check-label" htmlFor="creator">
+                        Организтор
                       </label>
                     </div>
                   </div>
