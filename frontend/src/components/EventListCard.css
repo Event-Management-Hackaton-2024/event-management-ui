@@ -1,0 +1,26 @@
+.custom-card {
+  position: relative;
+}
+
+.custom-card::before {
+  content: "";
+  position: absolute;
+  top: 10%; /* Adjust the top position to start lower */
+  left: 0;
+  height: 85%; /* Set height to 80% to cover most of the card height */
+  width: 2px;
+  background-color: orange; /* Set the color to orange */
+}
+
+.custom-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%; /* Adjust the left position to start after the text */
+  height: 2px;
+  width: 80%;
+  background-color: #000;
+}
+.text {
+  color: rgb(239, 156, 2);
+}

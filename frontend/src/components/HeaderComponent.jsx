@@ -34,7 +34,7 @@ const HeaderComponent = () => {
                   </li>
                 )}
                 <li className="nav-item m-3">
-                  <NavLink to="/аll-events" className="nav-link">
+                  <NavLink to="/all-events" className="nav-link">
                     СЪБИТИЯ
                   </NavLink>
                 </li>

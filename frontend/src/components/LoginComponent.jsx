@@ -45,7 +45,7 @@ const LoginComponent = () => {
 
             <div className="card-body">
               <form>
-                <div className="row mb-3">
+                <div className="row mb-3 align-items-center">
                   <label className="col-md-3 control-label"> Email</label>
                   <div className="col-md-9">
                     <input
@@ -59,7 +59,7 @@ const LoginComponent = () => {
                   </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 align-items-center">
                   <label className="col-md-3 control-label"> Парола </label>
                   <div className="col-md-9">
                     <input

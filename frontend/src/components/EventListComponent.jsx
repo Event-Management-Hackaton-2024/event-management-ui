@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { dummyEventData } from "../services/EventService";
+import EventListCard from "./EventListCard";
 
 const EventListComponent = () => {
-  return <div>EventListComponent</div>;
+  const [data, setData] = useState(dummyEventData);
+
+  const currentDate = new Date();
+
+  const upcomingEvents = data.filter((event) => new Date(event.date) >= currentDate);
+  const completedEvents = data.filter((event) => new Date(event.date) < currentDate);
+
+  return (
+    <div className="container mt-5">
+      <h2 className="mb-4 row justify-content-center">Предстоящи Събития</h2>
+      <div className="row justify-content-center">
+        {upcomingEvents.map((event, index) => (
+          <div className="col-md-10" key={index}>
+            <EventListCard event={event} />
+          </div>
+        ))}
+      </div>
+
+      <h2 className="mb-4 row justify-content-center">Завършени Събития</h2>
+      <div className="row justify-content-center">
+        {completedEvents.map((event, index) => (
+          <div className="col-md-10" key={index}>
+            <EventListCard event={event} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default EventListComponent;

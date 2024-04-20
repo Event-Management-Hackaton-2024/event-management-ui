@@ -1,0 +1,27 @@
+.footer {
+  bottom: 0px;
+  background-color: rgb(228, 228, 228);
+  color: #15708b;
+  padding: 20px 0;
+}
+
+.footer li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.social-media-icons a {
+  color: rgb(72, 72, 72);
+  margin-right: 10px;
+}
+.social-media-icons a svg {
+  width: 26px;
+  height: 26px;
+}
+
+@media (max-width: 768px) {
+  .footer .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
