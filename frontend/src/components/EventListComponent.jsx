@@ -1,9 +1,19 @@
-import React, { useState } from "react";
-import { dummyEventData } from "../services/EventService";
+import React, { useEffect, useState } from "react";
+import { getAllEvents } from "../services/EventService";
 import EventListCard from "./EventListCard";
 
 const EventListComponent = () => {
-  const [data, setData] = useState(dummyEventData);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getAllEvents()
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const currentDate = new Date();
 

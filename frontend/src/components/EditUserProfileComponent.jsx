@@ -11,9 +11,8 @@ const EditUserProfileComponent = ({ email }) => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    skills: [],
   });
-  const [interests, setInterests] = useState();
+  const [skills, setSkills] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -23,9 +22,10 @@ const EditUserProfileComponent = ({ email }) => {
         const token = getToken();
         if (token) {
           const user = await getUserInfo(token);
-          const allInterests = await getAllInterests();
           setUserData(user);
-          setInterests(allInterests);
+          getAllInterests().then((response) => {
+            setSkills(response.data);
+          });
         }
       } catch (error) {
         console.error("Error fetching user information:", error);
@@ -138,16 +138,16 @@ const EditUserProfileComponent = ({ email }) => {
           <label htmlFor="skills" className="form-label">
             Skills
           </label>
-          {userData.skills.map((skill, index) => (
+          {skills.map((skill, index) => (
             <div key={index} className="d-flex">
               <input
                 type="text"
                 className="form-control me-2"
                 placeholder="Skill"
-                value={skill}
+                value={skill.name}
                 onChange={(e) => handleSkillsChange(e, index)}
               />
-              {index === userData.skills.length - 1 && (
+              {index === skills.length - 1 && (
                 <button type="button" className="btn btn-outline-primary" onClick={handleAddSkill}>
                   Add Skill
                 </button>
@@ -155,7 +155,6 @@ const EditUserProfileComponent = ({ email }) => {
             </div>
           ))}
         </div>
-        {/* Add more fields here */}
         <button type="submit" className="btn btn-primary">
           Save Changes
         </button>
