@@ -22,8 +22,6 @@ const LoginComponent = () => {
 
         storeToken(token);
 
-        console.log(token);
-
         saveLoggedInUser(email, role);
         navigator("/");
 

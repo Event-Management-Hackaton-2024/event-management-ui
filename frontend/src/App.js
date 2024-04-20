@@ -8,6 +8,7 @@ import FooterComponent from "./components/FooterComponent";
 import EventsListPage from "./pages/EventsListPage";
 import EventsPage from "./pages/EventsPage";
 import CurrentUserPage from "./pages/CurrentUserPage";
+import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <BrowserRouter>
         <HeaderComponent />
         <Routes>
+          <Route path="/admin/events" element={<AdminPage />}></Route>
+
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>

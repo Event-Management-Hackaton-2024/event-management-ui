@@ -26,7 +26,15 @@ export const isUserLoggedIn = () => {
     return true;
   }
 };
-
+export const getUserInfo = async (token) => {
+  try {
+    const response = await axios.get(`${AUTH_REST_API_BASE_URL}/users/${token}`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to fetch user information");
+  }
+};
 export const getLoggedInUser = () => {
   const username = sessionStorage.getItem("authenticatedUser");
   return username;
@@ -37,12 +45,14 @@ export const logout = () => {
   sessionStorage.clear();
 };
 
-export const isAdminUser = () => {
-  let role = sessionStorage.getItem("role");
+export const isAdminUser = async () => {
+  try {
+    const user = await getUserInfo(getToken());
+    const role = user.roles[0].name;
 
-  if (role != null && role === "ROLE_ADMIN") {
-    return true;
-  } else {
+    return role === "ADMIN";
+  } catch (error) {
+    console.error("Error checking admin status:", error);
     return false;
   }
 };
