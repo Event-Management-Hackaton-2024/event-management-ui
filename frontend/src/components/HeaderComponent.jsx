@@ -9,12 +9,17 @@ const HeaderComponent = () => {
   const isAuth = isUserLoggedIn();
 
   useEffect(() => {
+
     const checkAdminStatus = async () => {
       try {
         const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
+        const role = localStorage.getItem("role");
         if (token) {
-          const admin = await isAdminUser();
-          setIsAdmin(admin);
+
+          if (role === "ADMIN") {
+            setIsAdmin(true);
+          }
         }
       } catch (error) {
         console.error("Error checking admin status:", error);
@@ -28,6 +33,8 @@ const HeaderComponent = () => {
 
   function handleLogout() {
     logout();
+    setIsAdmin(false);
+
     navigator("/login");
   }
 
@@ -44,8 +51,15 @@ const HeaderComponent = () => {
                 {" "}
                 {isAdmin && (
                   <li className="nav-item m-3">
-                    <NavLink to="/admin/products" className="nav-link">
+                    <NavLink to="/admin/events" className="nav-link">
                       АДМИН - СЪБИТИЯ
+                    </NavLink>
+                  </li>
+                )}
+                {isAdmin && (
+                  <li className="nav-item m-3">
+                    <NavLink to="/admin/interests" className="nav-link">
+                      АДМИН - ИНТЕРЕСИ
                     </NavLink>
                   </li>
                 )}

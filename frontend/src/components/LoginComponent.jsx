@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginAPICall, saveLoggedInUser, storeEmail, storeToken } from "../services/AuthService";
+import { loginAPICall, saveLoggedInUser, storeEmail, storeToken, getUserInfo, storeRole } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import "./StyleComponent.css";
 
@@ -14,19 +14,19 @@ const LoginComponent = () => {
 
     await loginAPICall(email, password)
       .then((response) => {
-        
+
         const token = response.data.token;
         const email = response.data.email;
-
-        const role = response.data.role;
+        const role = response.data.role[0].name;
 
         storeToken(token);
         storeEmail(email);
+        storeRole(role);
 
         saveLoggedInUser(email, role);
         navigator("/");
 
-        // window.location.reload(false);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.error(error);

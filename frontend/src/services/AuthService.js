@@ -11,6 +11,7 @@ export const loginAPICall = (email, password) =>
 
 export const storeToken = (token) => localStorage.setItem("token", token);
 export const storeEmail = (email) => localStorage.setItem("email", email);
+export const storeRole = (role) => localStorage.setItem("role", role);
 
 export const getToken = () => localStorage.getItem("token");
 export const getEmail = () => localStorage.getItem("email");
@@ -58,9 +59,6 @@ export const logout = () => {
 export const isAdminUser = async () => {
   try {
     const user = await getUserInfo(getToken(), getEmail());
-
-    console.log(user);
-
   } catch (error) {
     console.error("Error checking admin status:", error);
     return false;
