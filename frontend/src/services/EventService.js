@@ -1,3 +1,9 @@
+import axios from "axios";
+
+const REST_API_BASE_URL = "http://localhost:8080/events";
+
+export const getAllEvents = () => axios.get(REST_API_BASE_URL);
+
 export const dummyEventData = [
   {
     date: "2024-04-18",

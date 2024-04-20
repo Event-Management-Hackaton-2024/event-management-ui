@@ -5,11 +5,12 @@ const AddInterestComponent = () => {
   const [name, setName] = useState("");
 
   const handleSubmit = async (event) => {
-    const interest = { name };
     event.preventDefault();
+    const interest = { name };
     try {
       await addInterest(interest);
       setName("");
+      window.location.reload();
     } catch (error) {
       console.error("Error adding interest:", error);
     }

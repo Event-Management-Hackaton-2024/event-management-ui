@@ -10,6 +10,7 @@ import EventsPage from "./pages/EventsPage";
 import CurrentUserPage from "./pages/CurrentUserPage";
 import AdminPage from "./pages/admin/AdminPage";
 import InterestPage from "./pages/admin/InterestPage";
+import EditUserProfilePage from "./pages/EditUserProfilePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/admin/events" element={<AdminPage />}></Route>
           <Route path="/admin/interests" element={<InterestPage />}></Route>
+          <Route path="/my-profile/update/:email" element={<EditUserProfilePage />}></Route>
 
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>

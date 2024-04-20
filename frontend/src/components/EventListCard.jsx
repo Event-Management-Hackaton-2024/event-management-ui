@@ -48,15 +48,15 @@ const EventListCard = ({ event }) => {
           </div>
         </div>
         <div className="col-md-6 p-1">
-          <img
+          {/* <img
             src={event.image}
             alt={event.title}
             className="img-fluid rounded p-3"
             style={{ maxHeight: "350px", maxWidth: "100%" }}
-          />
-          <p className="card-text m-3">
+          /> */}
+          {/* <p className="card-text m-3">
             <VisitorsComponent visitorsArray={event.visitorsArray} />
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

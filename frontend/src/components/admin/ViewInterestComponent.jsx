@@ -21,7 +21,14 @@ const ViewInterestComponent = () => {
       </div>
       <div className="d-flex flex-wrap justify-content-start col-12">
         {interests ? (
-          interests.map((item) => <div key={item.id}>{item.name}</div>)
+          interests.map((item) => (
+            <>
+              <div key={item.id} className="border p-2 mb-2">
+                {item.name}
+              </div>
+              <br />
+            </>
+          ))
         ) : (
           <div>Loading...</div>
         )}

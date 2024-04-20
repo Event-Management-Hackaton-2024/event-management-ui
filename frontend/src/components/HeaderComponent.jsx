@@ -10,7 +10,6 @@ const HeaderComponent = () => {
 
   useEffect(() => {
     const checkAdminStatus = async () => {
-      
       try {
         const token = localStorage.getItem("token");
         if (token) {
@@ -64,7 +63,7 @@ const HeaderComponent = () => {
               <ul className="navbar-nav m-3">
                 {!isAuth && (
                   <li className="btn">
-                    <NavLink to="/login" className="nav-link btn control">
+                    <NavLink to="/register" className="nav-link btn control">
                       Register
                     </NavLink>
                   </li>
