@@ -9,6 +9,7 @@ import EventsListPage from "./pages/EventsListPage";
 import EventsPage from "./pages/EventsPage";
 import CurrentUserPage from "./pages/CurrentUserPage";
 import AdminPage from "./pages/admin/AdminPage";
+import InterestPage from "./pages/admin/InterestPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <HeaderComponent />
         <Routes>
           <Route path="/admin/events" element={<AdminPage />}></Route>
+          <Route path="/admin/interests" element={<InterestPage />}></Route>
 
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
