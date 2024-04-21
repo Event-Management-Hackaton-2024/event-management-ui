@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VisitorsComponent from "./VisitorsComponent";
-import "./EventListCard.css"; // Import custom CSS file
+import "./EventListCard.css";
+import { getUsersForEvent } from "../services/EventService";
 
 const EventListCard = ({ event }) => {
   const [joinEvent, setJoinEvent] = useState(false);
+  const [visitors, setVisitors] = useState([]);
+
+  useEffect(() => {
+    const fetchVisitors = async () => {
+      try {
+        const response = getUsersForEvent(event.id);
+        console.log(response);
+        setVisitors(response.data);
+      } catch (error) {
+        console.error("Error fetching visitors:", error);
+      }
+    };
+
+    fetchVisitors();
+  }, [event.id]);
+
   const currentDate = new Date();
   const eventDate = new Date(event.date);
+
   const upcomingEvent = currentDate < eventDate;
 
   return (
@@ -48,15 +66,15 @@ const EventListCard = ({ event }) => {
           </div>
         </div>
         <div className="col-md-6 p-1">
-          {/* <img
-            src={event.image}
+          <img
+            src="https://th.bing.com/th/id/OIP.zolbtShtE5P9mm0gs_YzTQAAAA?rs=1&pid=ImgDetMain"
             alt={event.title}
             className="img-fluid rounded p-3"
             style={{ maxHeight: "350px", maxWidth: "100%" }}
-          /> */}
-          {/* <p className="card-text m-3">
-            <VisitorsComponent visitorsArray={event.visitorsArray} />
-          </p> */}
+          />
+          <p className="card-text m-3">
+            <VisitorsComponent visitorsArray={visitors} />
+          </p>
         </div>
       </div>
     </div>

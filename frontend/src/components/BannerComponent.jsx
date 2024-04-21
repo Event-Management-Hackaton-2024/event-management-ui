@@ -27,7 +27,7 @@ const BannerComponent = () => {
       <div className="row mt-5">
         <div className="col text-center">
           <img
-            src="https://via.placeholder.com/800x400"
+            src="https://www.pinayads.com/wp-content/uploads/2019/11/TikTok-Trends-Event-in-HCMC-Vietnam.jpg"
             alt="Large Placeholder"
             className="img-fluid"
           />
