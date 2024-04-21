@@ -1,8 +1,23 @@
 import axios from "axios";
+import { getToken } from "./AuthService";
 
 const REST_API_BASE_URL = "http://localhost:8080/events";
 
 export const getAllEvents = () => axios.get(REST_API_BASE_URL);
+
+export const addUserIdToEvent = async (eventId, userId) => {
+  const url = `http://localhost:8080/events/${eventId}/add/${userId}`;
+};
+
+export const getUsersForEvent = (eventId) => {
+  axios.get(`http://localhost:8080/events/${eventId}/users`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getToken,
+    },
+  });
+};
 
 export const dummyEventData = [
   {
