@@ -18,7 +18,6 @@ const UserProfile = () => {
         console.error("Error fetching user information:", error);
       }
     };
-
     fetchUserInfo();
   }, []);
 
@@ -32,22 +31,18 @@ const UserProfile = () => {
       <h5 className="m-3">
         Попълнете информацията си за да се свържете по лесно с правилните хора
       </h5>
-      {userInfo ? (
-        <div className="m-3">
-          <p>Name: {userInfo.name}</p>
-          <p>Last Name: {userInfo.lastName}</p>
-          <p>Email: {userInfo.email}</p>
-          <p>Skills: {userInfo.skills.join(", ")}</p>
-          <p>Followers: {userInfo.followers.join(", ")}</p>
-          <p>Phone number: {userInfo.phoneNumber}</p>
+      <div className="m-3">
+        <p>Name: {userInfo?.name || ""}</p>
+        <p>Last Name: {userInfo?.lastName || ""}</p>
+        <p>Email: {userInfo?.email || ""}</p>
+        <p>Skills: {userInfo?.skills?.join(", ") || ""}</p>
+        <p>Followers: {userInfo?.followers?.join(", ") || ""}</p>
+        <p>Phone number: {userInfo?.phoneNumber || ""}</p>
 
-          <button className="btn btn-primary" onClick={() => handleUpdateProfile(userInfo.email)}>
-            Попълване на данни
-          </button>
-        </div>
-      ) : (
-        <p>Loading user information...</p>
-      )}
+        <button className="btn btn-primary" onClick={() => handleUpdateProfile(userInfo?.email)}>
+          Попълване на данни
+        </button>
+      </div>
     </div>
   );
 };

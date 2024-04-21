@@ -39,6 +39,10 @@ const RegisterComponent = () => {
       .then((response) => {
         console.log(response.data);
         setRegistrationStatus("success");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
       })
       .catch((error) => {
         console.error(error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { isUserLoggedIn, logout, isAdminUser } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import "./StyleComponent.css";
@@ -37,20 +37,24 @@ const HeaderComponent = () => {
       <header>
         <nav className="navbar navbar-expand-md navbar">
           <div className="container">
-            <a href="http://localhost:3000" className="navbar-brand m-2">
+            <Link to="http://localhost:3000" className="m-2">
+              <img src="../logo.png" width="200" height="100" alt="Logo" />
+            </Link>
+
+            {/* <a href="http://localhost:3000" className="navbar-brand m-2">
               Networking Platform
-            </a>
+            </a> */}
             <div className="collapse navbar-collapse p-1">
               <ul className="navbar-nav ms-auto me-3">
                 {" "}
-                {isAdmin && (
+                {isAuth && (
                   <li className="nav-item m-3">
                     <NavLink to="/admin/interests" className="nav-link">
                       АДМИН - ИНТЕРЕСИ
                     </NavLink>
                   </li>
                 )}
-                {isAdmin && (
+                {isAuth && (
                   <li className="nav-item m-3">
                     <NavLink to="/admin/events" className="nav-link">
                       АДМИН - СЪБИТИЯ

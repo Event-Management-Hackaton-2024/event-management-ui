@@ -5,21 +5,21 @@ import { getUsersForEvent } from "../services/EventService";
 
 const EventListCard = ({ event }) => {
   const [joinEvent, setJoinEvent] = useState(false);
-  const [visitors, setVisitors] = useState([]);
+  // const [visitors, setVisitors] = useState([]);
 
-  useEffect(() => {
-    const fetchVisitors = async () => {
-      try {
-        const response = getUsersForEvent(event.id);
-        console.log(response);
-        setVisitors(response.data);
-      } catch (error) {
-        console.error("Error fetching visitors:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchVisitors = async () => {
+  //     try {
+  //       const response = getUsersForEvent(event.id);
+  //       console.log(response);
+  //       setVisitors(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching visitors:", error);
+  //     }
+  //   };
 
-    fetchVisitors();
-  }, [event.id]);
+  //   fetchVisitors();
+  // }, [event.id]);
 
   const currentDate = new Date();
   const eventDate = new Date(event.date);
@@ -73,7 +73,7 @@ const EventListCard = ({ event }) => {
             style={{ maxHeight: "350px", maxWidth: "100%" }}
           />
           <p className="card-text m-3">
-            <VisitorsComponent visitorsArray={visitors} />
+            <VisitorsComponent visitorsArray={event.visitorsArray} />
           </p>
         </div>
       </div>
